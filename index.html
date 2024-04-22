@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Question</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Question</h1>
+    <div class="form-question">
+        <div id="question1">
+            <h2 class="pertanyaan">What do you need help with?</h2>
+            <label>
+                <input type="radio" name="jawaban" value="Lights, outlets, or switches" />Lights, outlets, or
+                switches</label><br />
+
+            <label>
+                <input type="radio" name="jawaban" value="Electrical for addition/remodel" />Electrical for
+                addition/remodel </label><br />
+
+            <label>
+                <input type="radio" name="jawaban" value="Upgrade electrical wiring/panel" />Upgrade electrical
+                wiring/panel </label><br />
+
+            <label>
+                <input type="radio" name="jawaban" value="Generator" />Generator </label><br />
+
+            <label>
+                <input type="radio" name="jawaban" value="Electric vehicle station installation" />Electric vehicle
+                station installation </label><br />
+
+            <label> <input type="radio" name="jawaban" value="Fan" />Fan</label><br />
+
+            <label>
+                <input type="radio" name="jawaban" value="Smart home system" />Smart
+                home system </label><br />
+
+            <label>
+                <input type="radio" name="jawaban" value="Telephone" />Telephone</label><br />
+
+            <label>
+                <input type="radio" name="jawaban" value="Lightning rod/lightning protection" />Lightning rod/lightning
+                protection</label><br />
+        </div>
+
+        <div id="list-question"></div>
+
+
+    </div>
+
+    <script>
+        var question = [
+            // Lights, outlets, or switches
+            {
+                id: "Lights, outlets, or switches",
+                pertanyaan: "What services do you need?",
+                jawaban: [
+                    "Repair problem with electrical outlets or switches",
+                    "Install or relocate electrical outlets, switches or light fixtures",
+                    "Install or repair ceiling or exhaust fans",
+                    "Install electrical vehicle charging station",
+                    "Install or repair smart home system",
+                ],
+                name: "question1"
+            },
+
+            {
+                id: "Install or repair ceiling or exhaust fans",
+                pertanyaan: "What type of fan do you need help with?",
+                jawaban: [
+                    "Ceiling Fan",
+                    "Bathroom exhaust fan",
+                    "Attic or whole house fan",
+                ],
+                name: "nextQuestion1"
+            },
+
+            {
+                id: "Ceiling Fan",
+                pertanyaan: "Are you installing or repairing an existing fan?",
+                jawaban: [
+                    "Install new fan",
+                    "Repair existing fan"
+                ],
+                name: "location-question"
+            },
+
+            // End Lights, outlets, or switches
+
+            // Upgrade electrical wiring/panel
+            {
+                id: "Upgrade electrical wiring/panel",
+                pertanyaan: "What kind of electrical service do you need?",
+                jawaban: [
+                    "Repair electrical system problem (e.g. flickering lights, blown fuses, etc.)",
+                    "Upgrade electrical panel or electrical service",
+                    "Install electrical for home addition or remodel",
+                    "Install, repair or relocate electrical outlets, switches or light fixtures",
+                    "Install electrical vehicle charging station",
+                ],
+                name: "location-question"
+            },
+
+            // End Upgrade electrical wiring/panel
+
+            // Generator 
+            {
+                id: "generator",
+                pertanyaan: "What kind of generator work do you need help with?",
+                jawaban: [
+                    "Installation",
+                    "Repair"
+                ],
+                name: "question-generator"
+            },
+
+            {
+                id: "installation",
+                pertanyaan: "What type of generator are you interested in?",
+                jawaban: [
+                    "Whole home/standby generator",
+                    "Portable generator",
+                    "Not sure/other"
+                ],
+                name: "question-generator-installation"
+            },
+
+            {
+                id: "next-installation",
+                pertanyaan: "What is the intended use?",
+                jawaban: [
+                    "Emergency back-up power",
+                    "Primary power source",
+                    "Other"
+                ],
+                name: "question-generator-installation-intended"
+            },
+
+            // End Generator
+
+            // Location Question
+            {
+                id: "location-question",
+                pertanyaan: "What kind of location is this?",
+                jawaban: [
+                    "Home",
+                    "Business"
+                ],
+                name: "location"
+            }
+            // End Location Question
+
+        ];
+
+        // console.log(question);
+
+        const listQuestion = document.getElementById("list-question");
+
+        listQuestion.innerHTML = question
+            .map((item) => {
+                return `
+            <div id='${item.id}' class='hidden'>
+                <h2 class="pertanyaan"> ${item.pertanyaan}</h2>
+                ${item.jawaban
+                        .map((jawab, index) => {
+                            return `
+                    <label>
+                        <input type="radio" name="${item.name}" value="${jawab}" />${jawab}
+                    </label><br/>`;
+                        })
+                        .join("")}
+            </div>
+            `;
+            })
+            .join("");
+
+        // Question 1
+        var radioCheck1 = document.querySelectorAll("input[name='jawaban']");
+        radioCheck1.forEach((radio1) => {
+            radio1.addEventListener("change", function () {
+                // Question Lights, outlets, or switches
+                const selectAnswer1 = document.querySelector(
+                    "input[name='jawaban']:checked"
+                ).value;
+
+                const question1 = document.getElementById(
+                    `Lights, outlets, or switches`
+                );
+
+                var nextQuestion1 = document.getElementById("Install or repair ceiling or exhaust fans")
+                var nextQuestion2 = document.getElementById("Ceiling Fan")
+
+                if (selectAnswer1 === "Lights, outlets, or switches") {
+                    question1.classList.remove("hidden");
+                } else {
+                    question1.classList.add("hidden");
+                    nextQuestion1.classList.add("hidden")
+                    nextQuestion2.classList.add("hidden")
+                }
+
+                // Question Upgrade electrical wiring/panel
+
+                const question3 = document.getElementById(
+                    `Upgrade electrical wiring/panel`
+                );
+
+                if (selectAnswer1 === "Upgrade electrical wiring/panel") {
+                    question3.classList.remove("hidden");
+                } else {
+                    question3.classList.add("hidden");
+                }
+            });
+        });
+
+        //   Question 2
+        var radioCheck2 = document.querySelectorAll(
+            `input[name='question1']`
+        );
+
+        radioCheck2.forEach((radio2) => {
+            radio2.addEventListener("change", function () {
+                var nextSelectedAnswer1 = document.querySelector(`input[name='question1']:checked`);
+                var nextQuestion1 = document.getElementById("Install or repair ceiling or exhaust fans")
+
+                // console.log(nextSelectedAnswer1);
+
+                if (nextSelectedAnswer1.value === "Install or repair ceiling or exhaust fans") {
+                    nextQuestion1.classList.remove("hidden")
+                    // nextSelectedAnswer1.checked = false
+                } else {
+                    nextQuestion1.classList.add("hidden")
+                }
+            })
+        })
+
+        // Next Question 2
+        var radioCheck3 = document.querySelectorAll(`input[name='nextQuestion1']`)
+        radioCheck3.forEach((radio3) => {
+            radio3.addEventListener("change", function () {
+                // nextQuestion2
+                var nextSelectedAnswer2 = document.querySelector(`input[name='nextQuestion1']:checked`)
+                var nextQuestion2 = document.getElementById("Ceiling Fan")
+
+
+                if (nextSelectedAnswer2.value) {
+                    nextQuestion2.classList.remove("hidden")
+                } else {
+                    nextQuestion2.classList.add("hidden")
+                }
+            })
+        })
+
+        var radioCheckLocation = document.querySelectorAll(`input[name='location-question']`)
+        radioCheckLocation.forEach((radio4) => {
+            radio4.addEventListener("change", function () {
+                var selectedAnswerLocation = document.querySelector(`input[name='location-question']:checked`)
+                var locationQuestion = document.getElementById("location-question")
+
+                // console.log(selectedAnswerLocation.value);
+                if (selectedAnswerLocation.value) {
+                    locationQuestion.classList.remove("hidden")
+                } else {
+                    locationQuestion.classList.add("hidden")
+                }
+
+            })
+        })
+
+
+        // Function to save selected answer to localStorage
+        function saveAnswer(questionId, answer) {
+            localStorage.setItem(questionId, answer);
+        }
+
+        // Add event listener to all radio inputs
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function () {
+                const questionId = this.getAttribute('name');
+                const answer = this.value;
+                saveAnswer(questionId, answer);
+            });
+        });
+
+    </script>
+</body>
+
+</html>
