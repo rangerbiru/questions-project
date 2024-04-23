@@ -196,6 +196,8 @@
 
                 var nextQuestion1 = document.getElementById("Install or repair ceiling or exhaust fans")
                 var nextQuestion2 = document.getElementById("Ceiling Fan")
+                var locationQuestion = document.getElementById("location-question")
+
 
                 if (selectAnswer1 === "Lights, outlets, or switches") {
                     question1.classList.remove("hidden");
@@ -203,6 +205,7 @@
                     question1.classList.add("hidden");
                     nextQuestion1.classList.add("hidden")
                     nextQuestion2.classList.add("hidden")
+                    locationQuestion.classList.add("hidden")
                 }
 
                 // Question Upgrade electrical wiring/panel
@@ -228,6 +231,9 @@
             radio2.addEventListener("change", function () {
                 var nextSelectedAnswer1 = document.querySelector(`input[name='question1']:checked`);
                 var nextQuestion1 = document.getElementById("Install or repair ceiling or exhaust fans")
+                var nextQuestion2 = document.getElementById("Ceiling Fan")
+                var locationQuestion = document.getElementById("location-question")
+
 
                 // console.log(nextSelectedAnswer1);
 
@@ -236,6 +242,8 @@
                     // nextSelectedAnswer1.checked = false
                 } else {
                     nextQuestion1.classList.add("hidden")
+                    nextQuestion2.classList.add("hidden")
+                    locationQuestion.classList.add("hidden")
                 }
             })
         })
