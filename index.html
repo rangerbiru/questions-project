@@ -182,8 +182,8 @@
             .join("");
 
         // Question 1
-        var radioCheck1 = document.querySelectorAll("input[name='jawaban']");
-        radioCheck1.forEach((radio1) => {
+        var radioCheck = document.querySelectorAll("input[name='jawaban']");
+        radioCheck.forEach((radio1) => {
             radio1.addEventListener("change", function () {
                 // Question Lights, outlets, or switches
                 const selectAnswer1 = document.querySelector(
@@ -201,11 +201,22 @@
 
                 if (selectAnswer1 === "Lights, outlets, or switches") {
                     question1.classList.remove("hidden");
+
+                    // Reset Radio
+                    const radioButtons = question1.querySelectorAll('input[type="radio"]');
+
+                    // Reset semua elemen radio ke nilai default (unchecked)
+                    radioButtons.forEach(radio => {
+                        radio.checked = false;
+                    });
+
                 } else {
                     question1.classList.add("hidden");
                     nextQuestion1.classList.add("hidden")
                     nextQuestion2.classList.add("hidden")
                     locationQuestion.classList.add("hidden")
+
+
                 }
 
                 // Question Upgrade electrical wiring/panel
@@ -219,15 +230,37 @@
                 } else {
                     question3.classList.add("hidden");
                 }
+
+                // Question Generator
+                const question4 = document.getElementById("generator")
+
+                var nextQuestion1 = document.getElementById("generator")
+                var nextQuestion2 = document.getElementById("installation")
+
+                if (selectAnswer1 === "Generator") {
+                    question4.classList.remove("hidden");
+
+                    // Reset Radio
+                    const radioButtons = question4.querySelectorAll('input[type="radio"]');
+
+                    // Reset semua elemen radio ke nilai default (unchecked)
+                    radioButtons.forEach(radio => {
+                        radio.checked = false;
+                    });
+                } else {
+                    question4.classList.add("hidden");
+                    nextQuestion1.classList.add("hidden");
+                    nextQuestion2.classList.add("hidden");
+                }
             });
         });
 
         //   Question 2
-        var radioCheck2 = document.querySelectorAll(
+        var nextRadioCheck1_1 = document.querySelectorAll(
             `input[name='question1']`
         );
 
-        radioCheck2.forEach((radio2) => {
+        nextRadioCheck1_1.forEach((radio2) => {
             radio2.addEventListener("change", function () {
                 var nextSelectedAnswer1 = document.querySelector(`input[name='question1']:checked`);
                 var nextQuestion1 = document.getElementById("Install or repair ceiling or exhaust fans")
@@ -240,6 +273,14 @@
                 if (nextSelectedAnswer1.value === "Install or repair ceiling or exhaust fans") {
                     nextQuestion1.classList.remove("hidden")
                     // nextSelectedAnswer1.checked = false
+
+                    // Reset Radio
+                    const radioButtons = nextQuestion1.querySelectorAll('input[type="radio"]');
+
+                    // Reset semua elemen radio ke nilai default (unchecked)
+                    radioButtons.forEach(radio => {
+                        radio.checked = false;
+                    });
                 } else {
                     nextQuestion1.classList.add("hidden")
                     nextQuestion2.classList.add("hidden")
@@ -249,21 +290,114 @@
         })
 
         // Next Question 2
-        var radioCheck3 = document.querySelectorAll(`input[name='nextQuestion1']`)
-        radioCheck3.forEach((radio3) => {
+        var nextRadioCheck1_2 = document.querySelectorAll(`input[name='nextQuestion1']`)
+        nextRadioCheck1_2.forEach((radio3) => {
             radio3.addEventListener("change", function () {
                 // nextQuestion2
                 var nextSelectedAnswer2 = document.querySelector(`input[name='nextQuestion1']:checked`)
                 var nextQuestion2 = document.getElementById("Ceiling Fan")
+                var locationQuestion = document.getElementById("location-question")
 
 
                 if (nextSelectedAnswer2.value) {
                     nextQuestion2.classList.remove("hidden")
+                    // Reset Radio
+                    const radioButtons = nextQuestion2.querySelectorAll('input[type="radio"]');
+
+                    // Reset semua elemen radio ke nilai default (unchecked)
+                    radioButtons.forEach(radio => {
+                        radio.checked = false;
+                    });
                 } else {
                     nextQuestion2.classList.add("hidden")
+                    locationQuestion.classList.add("hidden")
                 }
             })
         })
+
+        // End Next Question 2
+
+        // Next Question Generator
+        var radioCheck4 = document.querySelectorAll("input[name='question-generator']")
+        radioCheck4.forEach((radio4) => {
+            radio4.addEventListener("change", function () {
+                var selectAnswer2 = document.querySelector("input[name='question-generator']:checked")
+                var installationQuestion = document.getElementById("installation")
+                var nextInstallationQuestion = document.getElementById("next-installation")
+
+                // Jika memilih Installation
+                if (selectAnswer2.value === "Installation") {
+                    installationQuestion.classList.remove("hidden")
+
+                    // Reset Radio
+                    const radioButtons = installationQuestion.querySelectorAll('input[type="radio"]');
+
+                    // Reset semua elemen radio ke nilai default (unchecked)
+                    radioButtons.forEach(radio => {
+                        radio.checked = false;
+                    });
+                }
+
+                // Jika memilih Repair
+                if (selectAnswer2.value === "Repair") {
+                    installationQuestion.classList.add("hidden")
+                    console.log("repair testing");
+                }
+            })
+        })
+
+        // Next Question Generator
+        var radioCheck4 = document.querySelectorAll("input[name='question-generator']")
+        radioCheck4.forEach((radio4) => {
+            radio4.addEventListener("change", function () {
+                var selectAnswer4 = document.querySelector("input[name='question-generator']:checked")
+                var installationQuestion = document.getElementById("installation")
+                var nextInstallationQuestion = document.getElementById("next-installation")
+
+                // Jika memilih Installation
+                if (selectAnswer4.value === "Installation") {
+                    installationQuestion.classList.remove("hidden")
+
+                    // Reset Radio
+                    const radioButtons = installationQuestion.querySelectorAll('input[type="radio"]');
+
+                    // Reset semua elemen radio ke nilai default (unchecked)
+                    radioButtons.forEach(radio => {
+                        radio.checked = false;
+                    });
+                } else {
+                    nextInstallationQuestion.classList.add("hidden")
+                }
+
+                // Jika memilih Repair
+                if (selectAnswer4.value === "Repair") {
+                    installationQuestion.classList.add("hidden")
+                    nextInstallationQuestion.classList.add("hidden")
+                    // console.log("repair testing");
+                }
+            })
+        })
+
+        var nextRadioCheck4_1 = document.querySelectorAll("input[name='question-generator-installation']")
+        nextRadioCheck4_1.forEach((radio4) => {
+            radio4.addEventListener("change", () => {
+                var selectAnswer4 = document.querySelector("input[name='question-generator-installation']:checked")
+                var nextInstallationQuestion = document.getElementById("next-installation")
+
+                if (selectAnswer4.value) {
+                    nextInstallationQuestion.classList.remove("hidden")
+                    // Reset Radio
+                    const radioButtons = nextInstallationQuestion.querySelectorAll('input[type="radio"]');
+
+                    // Reset semua elemen radio ke nilai default (unchecked)
+                    radioButtons.forEach(radio => {
+                        radio.checked = false;
+                    });
+                }
+            })
+        })
+
+        // End Question Generator
 
         var radioCheckLocation = document.querySelectorAll(`input[name='location-question']`)
         radioCheckLocation.forEach((radio4) => {
@@ -274,6 +408,13 @@
                 // console.log(selectedAnswerLocation.value);
                 if (selectedAnswerLocation.value) {
                     locationQuestion.classList.remove("hidden")
+                    // Reset Radio
+                    const radioButtons = locationQuestion.querySelectorAll('input[type="radio"]');
+
+                    // Reset semua elemen radio ke nilai default (unchecked)
+                    radioButtons.forEach(radio => {
+                        radio.checked = false;
+                    });
                 } else {
                     locationQuestion.classList.add("hidden")
                 }

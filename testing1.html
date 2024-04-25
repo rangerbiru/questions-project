@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Question</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-question {
+            width: 60%;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            padding: 25px 40px;
+            border-radius: 10px;
+        }
+
+        .pertanyaan {
+            text-align: center;
+        }
+
+        .question:not(label) {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Question</h1>
+        <div class="form-question">
+            <div id="question1" class="question">
+                <h2 class="pertanyaan">What do you need help with?</h2>
+                <label>
+                    <input type="radio" name="jawaban" value="Lights, outlets, or switches" />Lights, outlets, or
+                    switches</label><br />
+
+                <label>
+                    <input type="radio" name="jawaban" value="Electrical for addition/remodel" />Electrical for
+                    addition/remodel </label><br />
+
+                <label>
+                    <input type="radio" name="jawaban" value="Upgrade electrical wiring/panel" />Upgrade electrical
+                    wiring/panel </label><br />
+
+                <label>
+                    <input type="radio" name="jawaban" value="Generator" />Generator </label><br />
+
+                <label>
+                    <input type="radio" name="jawaban" value="Electric vehicle station installation" />Electric vehicle
+                    station installation </label><br />
+
+                <label> <input type="radio" name="jawaban" value="Fan" />Fan</label><br />
+
+                <label>
+                    <input type="radio" name="jawaban" value="Smart home system" />Smart
+                    home system </label><br />
+
+                <label>
+                    <input type="radio" name="jawaban" value="Telephone" />Telephone</label><br />
+
+                <label>
+                    <input type="radio" name="jawaban" value="Lightning rod/lightning protection" />Lightning
+                    rod/lightning
+                    protection</label><br />
+            </div>
+
+            <div id="list-question"></div>
+        </div>
+    </div>
+
+    <script>
+        var question = [
+            // Lights, outlets, or switches
+            {
+                id: "q1",
+                pertanyaan: "What services do you need?",
+                jawaban: [
+                    "Repair problem with electrical outlets or switches",
+                    "Install or relocate electrical outlets, switches or light fixtures",
+                    "Install or repair ceiling or exhaust fans",
+                    "Install electrical vehicle charging station",
+                    "Install or repair smart home system",
+                ],
+                name: "question1",
+            },
+
+            {
+                id: "q1_1",
+                pertanyaan: "What type of fan do you need help with?",
+                jawaban: [
+                    "Ceiling Fan",
+                    "Bathroom exhaust fan",
+                    "Attic or whole house fan",
+                ],
+                name: "nextQuestion1_1",
+            },
+
+            {
+                id: "q1_2",
+                pertanyaan: "Are you installing or repairing an existing fan?",
+                jawaban: ["Install new fan", "Repair existing fan"],
+                name: "nextQuestion1_2",
+            },
+
+            // End Lights, outlets, or switches
+
+            // Upgrade electrical wiring/panel
+            {
+                id: "q3",
+                pertanyaan: "What kind of electrical service do you need?",
+                jawaban: [
+                    "Repair electrical system problem (e.g. flickering lights, blown fuses, etc.)",
+                    "Upgrade electrical panel or electrical service",
+                    "Install electrical for home addition or remodel",
+                    "Install, repair or relocate electrical outlets, switches or light fixtures",
+                    "Install electrical vehicle charging station",
+                ],
+                name: "question3",
+            },
+
+            // End Upgrade electrical wiring/panel
+
+            // Generator
+            {
+                id: "q4",
+                pertanyaan: "What kind of generator work do you need help with?",
+                jawaban: ["Installation", "Repair"],
+                name: "question4",
+            },
+
+            {
+                id: "q4_1",
+                pertanyaan: "What type of generator are you interested in?",
+                jawaban: [
+                    "Whole home/standby generator",
+                    "Portable generator",
+                    "Not sure/other",
+                ],
+                name: "nextQuestion4_1",
+            },
+
+            {
+                id: "q4_2",
+                pertanyaan: "What is the intended use?",
+                jawaban: ["Emergency back-up power", "Primary power source", "Other"],
+                name: "nextQuestion4_2",
+            },
+
+            {
+                id: "q4_3",
+                pertanyaan: "What electrical devices will be run by the generator?",
+                jawaban: [
+                    "Entire house",
+                    "Regular house lighting",
+                    "Emergency lighting",
+                    "Refrigerator",
+                    "Water heater",
+                    "Other",
+                ],
+                name: "nextQuestion4_3",
+            },
+
+            {
+                id: "q4_4",
+                pertanyaan: "Do you need help purchasing a generator?",
+                jawaban: ["Yes", "No"],
+                name: "nextQuestion4_4",
+            },
+
+            // End Generator
+
+            // Location Question
+            {
+                id: "location",
+                pertanyaan: "What kind of location is this?",
+                jawaban: ["Home", "Business"],
+                name: "locationQuestion",
+            },
+            // End Location Question
+        ];
+
+        // console.log(question);
+
+        const listQuestion = document.getElementById("list-question");
+
+        listQuestion.innerHTML = question
+            .map((item) => {
+                return `
+            <div id='${item.id}' class='hidden question'>
+                <h2 class="pertanyaan"> ${item.pertanyaan}</h2>
+                ${item.id === "q4_3"
+                        ? item.jawaban
+                            .map((jawab, index) => {
+                                return `
+                    <label>
+                        <input type="checkbox" name="${item.name}" value="${jawab}" />${jawab}
+                    </label><br/>`;
+                            })
+                            .join("")
+                        : item.jawaban
+                            .map((jawab, index) => {
+                                return `
+                    <label>
+                        <input type="radio" name="${item.name}" value="${jawab}" />${jawab}
+                    </label><br/>`;
+                            })
+                            .join("")
+                    }
+            </div>
+            `;
+            })
+            .join("");
+
+        const radioQuestion = document.querySelectorAll("input[name='jawaban']");
+        // Question 1
+        const radioQuestion1 = document.querySelectorAll(
+            "input[name='question1']"
+        );
+        const nextRadioQuestion1_1 = document.querySelectorAll(
+            "input[name='nextQuestion1_1']"
+        );
+        const nextRadioQuestion1_2 = document.querySelectorAll(
+            "input[name='nextQuestion1_2']"
+        );
+
+        // Question 3
+        const radioQuestion3 = document.querySelectorAll(
+            "input[name='question3']"
+        );
+
+        // Question 4
+        const radioQuestion4 = document.querySelectorAll(
+            "input[name='question4']"
+        );
+        const nextRadioQuestion4_1 = document.querySelectorAll(
+            "input[name='nextQuestion4_1']"
+        );
+        const nextRadioQuestion4_2 = document.querySelectorAll(
+            "input[name='nextQuestion4_2']"
+        );
+        const nextRadioQuestion4_3 = document.querySelectorAll(
+            "input[name='nextQuestion4_3']"
+        );
+        const nextRadioQuestion4_4 = document.querySelectorAll(
+            "input[name='nextQuestion4_4']"
+        );
+
+        // Question Location
+        const radioQuestionLocation = document.querySelectorAll(
+            "input[name='locationQuestion']"
+        );
+
+        // ---------------- Variable Input Radio --------------------------
+        // Question 1
+        const q1 = document.getElementById("q1");
+        const q1_1 = document.getElementById("q1_1");
+        const q1_2 = document.getElementById("q1_2");
+
+        //Question 3
+        const q3 = document.getElementById("q3");
+
+        // Question 4
+        const q4 = document.getElementById("q4");
+        const q4_1 = document.getElementById("q4_1");
+        const q4_2 = document.getElementById("q4_2");
+        const q4_3 = document.getElementById("q4_3");
+        const q4_4 = document.getElementById("q4_4");
+
+        // Question Location
+        const qlocation = document.getElementById("location");
+
+        // ------------------- Penjawabaran --------------------
+        // Question 1
+        radioQuestion.forEach((radio) => {
+            radio.addEventListener("change", (e) => {
+                // Answer 1
+                if (radio.value === "Lights, outlets, or switches") {
+                    q1.classList.remove("hidden");
+                    // localStorage.setItem("jawaban", e.target.value)
+                } else {
+                    q1.classList.add("hidden");
+                    qlocation.classList.add("hidden");
+                    // Uncheck the radio buttons
+                    document
+                        .querySelectorAll('input[name="question1"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                    q1_1.classList.add("hidden");
+                    q1_2.classList.add("hidden");
+                }
+
+                // Answer 2
+                if (radio.value === "Electrical for addition/remodel") {
+                    qlocation.classList.remove("hidden");
+                } else {
+                    document
+                        .querySelectorAll('input[name="locationQuestion"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                    qlocation.classList.add("hidden");
+                }
+
+                // Answer 3
+                if (radio.value === "Upgrade electrical wiring/panel") {
+                    q3.classList.remove("hidden");
+                } else {
+                    q3.classList.add("hidden");
+                    // Uncheck the radio buttons
+                    document
+                        .querySelectorAll('input[name="question3"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                }
+
+                // Answer 4
+                if (radio.value === "Generator") {
+                    q4.classList.remove("hidden");
+                } else {
+                    q4.classList.add("hidden");
+                    // Uncheck the radio buttons
+                    document
+                        .querySelectorAll('input[name="question4"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                    q4_1.classList.add("hidden");
+                    q4_2.classList.add("hidden");
+                    q4_3.classList.add("hidden");
+                    q4_4.classList.add("hidden");
+                }
+            });
+        });
+
+        // Next Question 1
+        radioQuestion1.forEach((radioNext) => {
+            radioNext.addEventListener("change", () => {
+                if (radioNext.value === "Install or repair ceiling or exhaust fans") {
+                    q1_1.classList.remove("hidden");
+                    document
+                        .querySelectorAll('input[name="nextQuestion1_1"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                } else {
+                    q1_1.classList.add("hidden");
+                    q1_2.classList.add("hidden");
+                }
+
+                if (radioNext.value !== "Install or repair ceiling or exhaust fans") {
+                    qlocation.classList.remove("hidden");
+                    document
+                        .querySelectorAll('input[name="locationQuestion"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                } else {
+                    qlocation.classList.add("hidden");
+                }
+            });
+        });
+
+        // Next Question 1_1
+        nextRadioQuestion1_1.forEach((radioNext) => {
+            radioNext.addEventListener("change", () => {
+                if (radioNext.value) {
+                    q1_2.classList.remove("hidden");
+                    document
+                        .querySelectorAll('input[name="nextQuestion1_2"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                } else {
+                    q1_2.classList.add("hidden");
+                }
+            });
+        });
+
+        // Next Question1_2
+        nextRadioQuestion1_2.forEach((radioNext) => {
+            radioNext.addEventListener("change", () => {
+                if (radioNext.value) {
+                    qlocation.classList.remove("hidden");
+                    document
+                        .querySelectorAll('input[name="locationQuestion"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                } else {
+                    qlocation.classList.add("hidden");
+                }
+            });
+        });
+
+        // Next Question 3
+        radioQuestion3.forEach((radioNext) => {
+            radioNext.addEventListener("change", () => {
+                if (radioNext.value) {
+                    qlocation.classList.remove("hidden");
+                    document
+                        .querySelectorAll('input[name="locationQuestion"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                } else {
+                    qlocation.classList.add("hidden");
+                }
+            });
+        });
+
+        // Next Question 4_1
+        radioQuestion4.forEach((radioNext) => {
+            radioNext.addEventListener("change", () => {
+                if (radioNext.value === "Installation") {
+                    q4_1.classList.remove("hidden");
+                    document
+                        .querySelectorAll('input[name="nextQuestion4_1"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                } else {
+                    q4_1.classList.add("hidden");
+                }
+            });
+        });
+
+        // Next Question 4_1
+        nextRadioQuestion4_1.forEach((radioNext) => {
+            radioNext.addEventListener("change", () => {
+                if (radioNext.value) {
+                    q4_2.classList.remove("hidden");
+                    document
+                        .querySelectorAll('input[name="nextQuestion4_2"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                } else {
+                    q4_2.classList.add("hidden");
+                }
+            });
+        });
+
+        // Next Question 4_2
+        nextRadioQuestion4_2.forEach((radioNext) => {
+            radioNext.addEventListener("change", () => {
+                if (radioNext.value) {
+                    q4_3.classList.remove("hidden");
+                    document
+                        .querySelectorAll('input[name="nextQuestion4_3"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                } else {
+                    q4_3.classList.add("hidden");
+                }
+            });
+        });
+
+        // Next Question 4_3
+        nextRadioQuestion4_3.forEach((radioNext) => {
+            radioNext.addEventListener("change", () => {
+                if (radioNext.value) {
+                    q4_4.classList.remove("hidden");
+                    document
+                        .querySelectorAll('input[name="nextQuestion4_4"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                } else {
+                    q4_4.classList.add("hidden");
+                }
+            });
+        });
+
+        // Next Question 4_4
+        nextRadioQuestion4_4.forEach((radioNext) => {
+            radioNext.addEventListener("change", () => {
+                if (radioNext.value) {
+                    qlocation.classList.remove("hidden");
+                    document
+                        .querySelectorAll('input[name="locationQuestion"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                } else {
+                    qlocation.classList.add("hidden");
+                }
+            });
+        });
+
+        // window.addEventListener("load", function () {
+        //     const selectOpt = localStorage.getItem("jawaban")
+        //     if (selectOpt) {
+        //         const radioButton = document.querySelector(`input[value="${selectOpt}"]`);
+        //         radioButton.checked = true;
+        //         q1.classList.remove("hidden")
+        //     }
+        // })
+    </script>
+</body>
+
+</html>
