@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web Question</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            box-sizing: border-box;
+        }
+
         .hidden {
             display: none;
         }
@@ -16,61 +25,107 @@
             align-items: center;
         }
 
-        .form-question {
+        h1 {
+            text-decoration: underline;
+        }
+
+        .form-question,
+        #list-question {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .question {
             width: 60%;
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             padding: 25px 40px;
             border-radius: 10px;
+            margin: 30px 0;
         }
 
         .pertanyaan {
             text-align: center;
+            margin-bottom: 20px;
         }
 
-        .question:not(label) {
-            background-color: red;
+        .answers {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .answers label {
+            border: 2px solid #000;
+            padding: 20px 10px;
+            border-radius: 10px;
+            display: flex;
+            gap: 6px;
+            cursor: pointer;
+            transition: .1s ease;
+        }
+
+        .answers label:hover {
+            background-color: rgb(238, 132, 132);
+        }
+
+        input[type="radio"]:checked,
+        input[type="checkbox"]:checked {
+            accent-color: #f82222;
+        }
+
+        .text-tell-us textarea {
+            width: 100%;
+            resize: none;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 18px;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Question</h1>
+        <h1>Electrician</h1>
         <div class="form-question">
             <div id="question1" class="question">
                 <h2 class="pertanyaan">What do you need help with?</h2>
-                <label>
-                    <input type="radio" name="jawaban" value="Lights, outlets, or switches" />Lights, outlets, or
-                    switches</label><br />
+                <div class="answers">
+                    <label>
+                        <input type="radio" name="jawaban" value="Lights, outlets, or switches" />Lights, outlets, or
+                        switches</label>
 
-                <label>
-                    <input type="radio" name="jawaban" value="Electrical for addition/remodel" />Electrical for
-                    addition/remodel </label><br />
+                    <label>
+                        <input type="radio" name="jawaban" value="Electrical for addition/remodel" />Electrical for
+                        addition/remodel </label>
 
-                <label>
-                    <input type="radio" name="jawaban" value="Upgrade electrical wiring/panel" />Upgrade electrical
-                    wiring/panel </label><br />
+                    <label>
+                        <input type="radio" name="jawaban" value="Upgrade electrical wiring/panel" />Upgrade electrical
+                        wiring/panel </label>
 
-                <label>
-                    <input type="radio" name="jawaban" value="Generator" />Generator </label><br />
+                    <label>
+                        <input type="radio" name="jawaban" value="Generator" />Generator </label>
 
-                <label>
-                    <input type="radio" name="jawaban" value="Electric vehicle station installation" />Electric vehicle
-                    station installation </label><br />
+                    <label>
+                        <input type="radio" name="jawaban" value="Electric vehicle station installation" />Electric
+                        vehicle
+                        station installation </label>
 
-                <label> <input type="radio" name="jawaban" value="Fan" />Fan</label><br />
+                    <label> <input type="radio" name="jawaban" value="Fan" />Fan</label>
 
-                <label>
-                    <input type="radio" name="jawaban" value="Smart home system" />Smart
-                    home system </label><br />
+                    <label>
+                        <input type="radio" name="jawaban" value="Smart home system" />Smart
+                        home system </label>
 
-                <label>
-                    <input type="radio" name="jawaban" value="Telephone" />Telephone</label><br />
+                    <label>
+                        <input type="radio" name="jawaban" value="Telephone" />Telephone</label>
 
-                <label>
-                    <input type="radio" name="jawaban" value="Lightning rod/lightning protection" />Lightning
-                    rod/lightning
-                    protection</label><br />
+                    <label>
+                        <input type="radio" name="jawaban" value="Lightning rod/lightning protection" />Lightning
+                        rod/lightning
+                        protection</label>
+                </div>
             </div>
 
             <div id="list-question"></div>
@@ -78,6 +133,7 @@
     </div>
 
     <script>
+
         var question = [
             // Lights, outlets, or switches
             {
@@ -130,6 +186,7 @@
             // End Upgrade electrical wiring/panel
 
             // Generator
+            // Generator - Installation
             {
                 id: "q4",
                 pertanyaan: "What kind of generator work do you need help with?",
@@ -138,25 +195,25 @@
             },
 
             {
-                id: "q4_1",
+                id: "q4_1_1",
                 pertanyaan: "What type of generator are you interested in?",
                 jawaban: [
                     "Whole home/standby generator",
                     "Portable generator",
                     "Not sure/other",
                 ],
-                name: "nextQuestion4_1",
+                name: "nextQuestion4_1_1",
             },
 
             {
-                id: "q4_2",
+                id: "q4_1_2",
                 pertanyaan: "What is the intended use?",
                 jawaban: ["Emergency back-up power", "Primary power source", "Other"],
-                name: "nextQuestion4_2",
+                name: "nextQuestion4_1_2",
             },
 
             {
-                id: "q4_3",
+                id: "q4_1_3",
                 pertanyaan: "What electrical devices will be run by the generator?",
                 jawaban: [
                     "Entire house",
@@ -166,15 +223,41 @@
                     "Water heater",
                     "Other",
                 ],
-                name: "nextQuestion4_3",
+                name: "nextQuestion4_1_3",
             },
 
             {
-                id: "q4_4",
+                id: "q4_1_4",
                 pertanyaan: "Do you need help purchasing a generator?",
                 jawaban: ["Yes", "No"],
-                name: "nextQuestion4_4",
+                name: "nextQuestion4_1_4",
             },
+
+            // End Generator - Installation
+
+            // Generator - Repair
+
+            {
+                id: "q4_2_1",
+                pertanyaan: "What type of generator needs to be repaired?",
+                jawaban: [
+                    "Portable",
+                    "Whole home/standby generator"
+                ],
+                name: "nextQuestion4_2_1"
+            },
+            {
+                id: "q4_2_2",
+                pertanyaan: "What best describes the repair needed?",
+                jawaban: [
+                    "General maintenance",
+                    "Not enough power",
+                    "Won't start",
+                    "Other"
+                ],
+                name: "nextQuestion4_2_2"
+            },
+            // End Generator - Repair
 
             // End Generator
 
@@ -186,6 +269,28 @@
                 name: "locationQuestion",
             },
             // End Location Question
+
+            // When do you need this work done
+            {
+                id: "workDone",
+                pertanyaan: "When do you need this work done?",
+                jawaban: [
+                    "Within 2 weeks",
+                    "More than 2 weeks",
+                    "Not sure - still planning/budgeting"
+                ],
+                name: "work-done"
+            },
+            // End When do you need this work done
+
+            // Please tell us a little about your project.
+            {
+                id: "tellUs",
+                pertanyaan: "Please tell us a little about your project.",
+                jawaban: [],
+                name: "tell-us"
+            }
+            // End Please tell us a little about your project.
         ];
 
         // console.log(question);
@@ -194,31 +299,43 @@
 
         listQuestion.innerHTML = question
             .map((item) => {
+                let answerHtml = "";
+                if (item.id === "q4_1_3") {
+                    answerHtml = item.jawaban
+                        .map((jawab, index) => {
+                            return `
+            <label>
+                <input type="checkbox" name="${item.name}" value="${jawab}" />${jawab}
+            </label>`;
+                        })
+                        .join("");
+                } else if (item.id === "tellUs") {
+                    answerHtml = `
+            <div class="text-tell-us">
+                <textarea name="${item.name}" cols="10" placeholder="How can a pro help you? The more details the better - it helps pros provide the most accurate quote! (Optional)"></textarea>
+            </div>`;
+                } else {
+                    answerHtml = item.jawaban
+                        .map((jawab, index) => {
+                            return `
+            <label>
+                <input type="radio" name="${item.name}" value="${jawab}" />${jawab}
+            </label>`;
+                        })
+                        .join("");
+                }
+
                 return `
-            <div id='${item.id}' class='hidden question'>
-                <h2 class="pertanyaan"> ${item.pertanyaan}</h2>
-                ${item.id === "q4_3"
-                        ? item.jawaban
-                            .map((jawab, index) => {
-                                return `
-                    <label>
-                        <input type="checkbox" name="${item.name}" value="${jawab}" />${jawab}
-                    </label><br/>`;
-                            })
-                            .join("")
-                        : item.jawaban
-                            .map((jawab, index) => {
-                                return `
-                    <label>
-                        <input type="radio" name="${item.name}" value="${jawab}" />${jawab}
-                    </label><br/>`;
-                            })
-                            .join("")
-                    }
+        <div id='${item.id}' class='hidden question'>
+            <h2 class="pertanyaan"> ${item.pertanyaan}</h2>
+            <div class="answers">
+                ${answerHtml}
             </div>
-            `;
+        </div>
+        `;
             })
             .join("");
+
 
         const radioQuestion = document.querySelectorAll("input[name='jawaban']");
         // Question 1
@@ -238,26 +355,42 @@
         );
 
         // Question 4
+
+        // Installation
         const radioQuestion4 = document.querySelectorAll(
             "input[name='question4']"
         );
-        const nextRadioQuestion4_1 = document.querySelectorAll(
-            "input[name='nextQuestion4_1']"
+        const nextRadioQuestion4_1_1 = document.querySelectorAll(
+            "input[name='nextQuestion4_1_1']"
         );
-        const nextRadioQuestion4_2 = document.querySelectorAll(
-            "input[name='nextQuestion4_2']"
+        const nextRadioQuestion4_1_2 = document.querySelectorAll(
+            "input[name='nextQuestion4_1_2']"
         );
-        const nextRadioQuestion4_3 = document.querySelectorAll(
-            "input[name='nextQuestion4_3']"
+        const nextRadioQuestion4_1_3 = document.querySelectorAll(
+            "input[name='nextQuestion4_1_3']"
         );
-        const nextRadioQuestion4_4 = document.querySelectorAll(
-            "input[name='nextQuestion4_4']"
+        const nextRadioQuestion4_1_4 = document.querySelectorAll(
+            "input[name='nextQuestion4_1_4']"
+        );
+
+        // Repair
+        const nextRadioQuestion4_2_1 = document.querySelectorAll(
+            "input[name='nextQuestion4_2_1']"
+        );
+        const nextRadioQuestion4_2_2 = document.querySelectorAll(
+            "input[name='nextQuestion4_2_2']"
         );
 
         // Question Location
         const radioQuestionLocation = document.querySelectorAll(
             "input[name='locationQuestion']"
         );
+
+        // Question Workdone
+        const radioWorkDone = document.querySelectorAll("input[name='work-done']")
+
+        // Question Tell Us
+        const textAreaTellUs = document.querySelectorAll("input[name='tell-us']")
 
         // ---------------- Variable Input Radio --------------------------
         // Question 1
@@ -270,13 +403,29 @@
 
         // Question 4
         const q4 = document.getElementById("q4");
-        const q4_1 = document.getElementById("q4_1");
-        const q4_2 = document.getElementById("q4_2");
-        const q4_3 = document.getElementById("q4_3");
-        const q4_4 = document.getElementById("q4_4");
+        const q4_1_1 = document.getElementById("q4_1_1");
+        const q4_1_2 = document.getElementById("q4_1_2");
+        const q4_1_3 = document.getElementById("q4_1_3");
+        const q4_1_4 = document.getElementById("q4_1_4");
+
+        const q4_2_1 = document.getElementById("q4_2_1");
+        const q4_2_2 = document.getElementById("q4_2_2");
+
 
         // Question Location
         const qlocation = document.getElementById("location");
+
+        // Question Work Done
+        const workDone = document.getElementById("workDone")
+
+        // Question Tell Us
+        const tellUs = document.getElementById("tellUs")
+
+
+        // function qtn1() {
+        //     q1.classList.remove("hidden");
+        //     document.getElementById("q1").scrollIntoView({ behavior: 'smooth' });
+        // }
 
         // ------------------- Penjawabaran --------------------
         // Question 1
@@ -285,7 +434,8 @@
                 // Answer 1
                 if (radio.value === "Lights, outlets, or switches") {
                     q1.classList.remove("hidden");
-                    // localStorage.setItem("jawaban", e.target.value)
+                    q1.scrollIntoView({ behavior: "smooth" })
+                    localStorage.setItem("What do you need help with?", e.target.value)
                 } else {
                     q1.classList.add("hidden");
                     qlocation.classList.add("hidden");
@@ -297,11 +447,17 @@
                         });
                     q1_1.classList.add("hidden");
                     q1_2.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
+
                 }
 
                 // Answer 2
                 if (radio.value === "Electrical for addition/remodel") {
                     qlocation.classList.remove("hidden");
+                    qlocation.scrollIntoView({ behavior: "smooth" })
+
+                    localStorage.setItem("What do you need help with?", e.target.value)
                 } else {
                     document
                         .querySelectorAll('input[name="locationQuestion"]')
@@ -309,11 +465,17 @@
                             input.checked = false;
                         });
                     qlocation.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
+
                 }
 
                 // Answer 3
                 if (radio.value === "Upgrade electrical wiring/panel") {
                     q3.classList.remove("hidden");
+                    q3.scrollIntoView({ behavior: "smooth" })
+
+                    localStorage.setItem("What do you need help with?", e.target.value)
                 } else {
                     q3.classList.add("hidden");
                     // Uncheck the radio buttons
@@ -322,11 +484,16 @@
                         .forEach((input) => {
                             input.checked = false;
                         });
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
                 }
 
                 // Answer 4
                 if (radio.value === "Generator") {
                     q4.classList.remove("hidden");
+                    q4.scrollIntoView({ behavior: "smooth" })
+
+                    localStorage.setItem("What do you need help with?", e.target.value)
                 } else {
                     q4.classList.add("hidden");
                     // Uncheck the radio buttons
@@ -335,10 +502,12 @@
                         .forEach((input) => {
                             input.checked = false;
                         });
-                    q4_1.classList.add("hidden");
-                    q4_2.classList.add("hidden");
-                    q4_3.classList.add("hidden");
-                    q4_4.classList.add("hidden");
+                    q4_1_1.classList.add("hidden");
+                    q4_1_2.classList.add("hidden");
+                    q4_1_3.classList.add("hidden");
+                    q4_1_4.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
                 }
             });
         });
@@ -348,6 +517,7 @@
             radioNext.addEventListener("change", () => {
                 if (radioNext.value === "Install or repair ceiling or exhaust fans") {
                     q1_1.classList.remove("hidden");
+                    q1_1.scrollIntoView({ behavior: "smooth" })
                     document
                         .querySelectorAll('input[name="nextQuestion1_1"]')
                         .forEach((input) => {
@@ -356,10 +526,13 @@
                 } else {
                     q1_1.classList.add("hidden");
                     q1_2.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
                 }
 
                 if (radioNext.value !== "Install or repair ceiling or exhaust fans") {
                     qlocation.classList.remove("hidden");
+                    qlocation.scrollIntoView({ behavior: "smooth" })
                     document
                         .querySelectorAll('input[name="locationQuestion"]')
                         .forEach((input) => {
@@ -367,6 +540,8 @@
                         });
                 } else {
                     qlocation.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
                 }
             });
         });
@@ -376,6 +551,7 @@
             radioNext.addEventListener("change", () => {
                 if (radioNext.value) {
                     q1_2.classList.remove("hidden");
+                    q1_2.scrollIntoView({ behavior: "smooth" })
                     document
                         .querySelectorAll('input[name="nextQuestion1_2"]')
                         .forEach((input) => {
@@ -383,6 +559,8 @@
                         });
                 } else {
                     q1_2.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
                 }
             });
         });
@@ -392,6 +570,7 @@
             radioNext.addEventListener("change", () => {
                 if (radioNext.value) {
                     qlocation.classList.remove("hidden");
+                    qlocation.scrollIntoView({ behavior: "smooth" })
                     document
                         .querySelectorAll('input[name="locationQuestion"]')
                         .forEach((input) => {
@@ -399,6 +578,8 @@
                         });
                 } else {
                     qlocation.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
                 }
             });
         });
@@ -408,6 +589,7 @@
             radioNext.addEventListener("change", () => {
                 if (radioNext.value) {
                     qlocation.classList.remove("hidden");
+                    qlocation.scrollIntoView({ behavior: "smooth" })
                     document
                         .querySelectorAll('input[name="locationQuestion"]')
                         .forEach((input) => {
@@ -415,6 +597,8 @@
                         });
                 } else {
                     qlocation.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
                 }
             });
         });
@@ -423,71 +607,102 @@
         radioQuestion4.forEach((radioNext) => {
             radioNext.addEventListener("change", () => {
                 if (radioNext.value === "Installation") {
-                    q4_1.classList.remove("hidden");
+                    q4_1_1.classList.remove("hidden");
+                    q4_1_1.scrollIntoView({ behavior: "smooth" })
                     document
-                        .querySelectorAll('input[name="nextQuestion4_1"]')
+                        .querySelectorAll('input[name="nextQuestion4_1_1"]')
                         .forEach((input) => {
                             input.checked = false;
                         });
                 } else {
-                    q4_1.classList.add("hidden");
+                    q4_1_1.classList.add("hidden");
+                    q4_1_2.classList.add("hidden");
+                    qlocation.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
+                }
+
+                if (radioNext.value === "Repair") {
+                    q4_2_1.classList.remove("hidden");
+                    q4_2_1.scrollIntoView({ behavior: "smooth" })
+                    document
+                        .querySelectorAll('input[name="nextQuestion4_2_1"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                } else {
+                    q4_2_1.classList.add("hidden");
+                    q4_2_2.classList.add("hidden");
+                    qlocation.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
                 }
             });
         });
 
-        // Next Question 4_1
-        nextRadioQuestion4_1.forEach((radioNext) => {
+        // Next Question 4_1_1
+        nextRadioQuestion4_1_1.forEach((radioNext) => {
             radioNext.addEventListener("change", () => {
                 if (radioNext.value) {
-                    q4_2.classList.remove("hidden");
+                    q4_1_2.classList.remove("hidden");
+                    q4_1_2.scrollIntoView({ behavior: "smooth" })
                     document
-                        .querySelectorAll('input[name="nextQuestion4_2"]')
+                        .querySelectorAll('input[name="nextQuestion4_1_2"]')
                         .forEach((input) => {
                             input.checked = false;
                         });
                 } else {
-                    q4_2.classList.add("hidden");
+                    q4_1_2.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
                 }
             });
         });
 
-        // Next Question 4_2
-        nextRadioQuestion4_2.forEach((radioNext) => {
+        // Next Question 4_1_2
+        nextRadioQuestion4_1_2.forEach((radioNext) => {
             radioNext.addEventListener("change", () => {
                 if (radioNext.value) {
-                    q4_3.classList.remove("hidden");
+                    q4_1_3.classList.remove("hidden");
+                    q4_1_3.scrollIntoView({ behavior: "smooth" })
                     document
-                        .querySelectorAll('input[name="nextQuestion4_3"]')
+                        .querySelectorAll('input[name="nextQuestion4_1_3"]')
                         .forEach((input) => {
                             input.checked = false;
                         });
                 } else {
-                    q4_3.classList.add("hidden");
+                    q4_1_3.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
                 }
             });
         });
 
-        // Next Question 4_3
-        nextRadioQuestion4_3.forEach((radioNext) => {
+        // Next Question 4_1_3
+        nextRadioQuestion4_1_3.forEach((radioNext) => {
             radioNext.addEventListener("change", () => {
                 if (radioNext.value) {
-                    q4_4.classList.remove("hidden");
+                    q4_1_4.classList.remove("hidden");
+                    // q4_1_4.scrollIntoView({ behavior: "smooth" })
                     document
-                        .querySelectorAll('input[name="nextQuestion4_4"]')
+                        .querySelectorAll('input[name="nextQuestion4_1_4"]')
                         .forEach((input) => {
                             input.checked = false;
                         });
                 } else {
-                    q4_4.classList.add("hidden");
+                    q4_1_4.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
                 }
             });
         });
 
-        // Next Question 4_4
-        nextRadioQuestion4_4.forEach((radioNext) => {
+        // Next Question 4_1_4
+        nextRadioQuestion4_1_4.forEach((radioNext) => {
             radioNext.addEventListener("change", () => {
                 if (radioNext.value) {
                     qlocation.classList.remove("hidden");
+                    qlocation.scrollIntoView({ behavior: "smooth" })
                     document
                         .querySelectorAll('input[name="locationQuestion"]')
                         .forEach((input) => {
@@ -495,18 +710,105 @@
                         });
                 } else {
                     qlocation.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
                 }
             });
         });
 
-        // window.addEventListener("load", function () {
-        //     const selectOpt = localStorage.getItem("jawaban")
-        //     if (selectOpt) {
-        //         const radioButton = document.querySelector(`input[value="${selectOpt}"]`);
-        //         radioButton.checked = true;
-        //         q1.classList.remove("hidden")
-        //     }
-        // })
+        // Next Question 4_2_1
+        nextRadioQuestion4_2_1.forEach((radioNext) => {
+            radioNext.addEventListener("change", () => {
+                if (radioNext.value) {
+                    q4_2_2.classList.remove("hidden");
+                    q4_2_2.scrollIntoView({ behavior: "smooth" })
+                    document
+                        .querySelectorAll('input[name="locationQuestion"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                } else {
+                    q4_2_2.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
+                }
+            });
+        });
+
+        // Next Question 4_2_2
+        nextRadioQuestion4_2_2.forEach((radioNext) => {
+            radioNext.addEventListener("change", () => {
+                if (radioNext.value) {
+                    qlocation.classList.remove("hidden");
+                    qlocation.scrollIntoView({ behavior: "smooth" })
+                    document
+                        .querySelectorAll('input[name="locationQuestion"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                } else {
+                    qlocation.classList.add("hidden");
+                    workDone.classList.add("hidden");
+                    tellUs.classList.add("hidden");
+                }
+            });
+        });
+
+        // Answer Location
+        radioQuestionLocation.forEach((radio) => {
+            radio.addEventListener("change", () => {
+                if (radio.value) {
+                    workDone.classList.remove("hidden")
+                    workDone.scrollIntoView({ behavior: "smooth" })
+                    document
+                        .querySelectorAll('input[name="work-done"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                }
+            })
+        })
+
+        // Answer Work Done
+        radioWorkDone.forEach((radio) => {
+            radio.addEventListener("change", () => {
+                if (radio.value) {
+                    tellUs.classList.remove("hidden")
+                    tellUs.scrollIntoView({ behavior: "smooth" })
+                    document
+                        .querySelectorAll('input[name="tell-us"]')
+                        .forEach((input) => {
+                            input.checked = false;
+                        });
+                }
+            })
+        })
+
+
+        // Load LocalStorage
+        const selectOpt = localStorage.getItem("What do you need help with?")
+        const radioButton = document.querySelector(`input[value="${selectOpt}"]`);
+        window.addEventListener("load", function () {
+            if (selectOpt === "Lights, outlets, or switches") {
+                radioButton.checked = true;
+                q1.classList.remove("hidden")
+            }
+
+            if (selectOpt === "Electrical for addition/remodel") {
+                radioButton.checked = true;
+                qlocation.classList.remove("hidden")
+            }
+
+            if (selectOpt === "Upgrade electrical wiring/panel") {
+                radioButton.checked = true;
+                q3.classList.remove("hidden")
+            }
+
+            if (selectOpt === "Generator") {
+                radioButton.checked = true;
+                q4.classList.remove("hidden")
+            }
+        })
     </script>
 </body>
 
