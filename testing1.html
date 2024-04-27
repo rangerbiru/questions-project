@@ -107,6 +107,7 @@
         border-radius: 10px;
         width: 60%;
         margin-bottom: 20px;
+        cursor: pointer;
       }
 
       @media (max-width: 768px) {
@@ -202,7 +203,9 @@
         </div>
 
         <div id="list-question"></div>
-        <button id="submitButton" onclick="submitBtn()">Submit</button>
+        <button id="submitButton" class="hidden" onclick="submitBtn()">
+          Submit
+        </button>
       </div>
 
       <!-- <button id="submitBtn" onclick="submitForm()" class="">Submit</button> -->
@@ -866,6 +869,9 @@
               .forEach((input) => {
                 input.checked = false;
               });
+
+            const btnlast = document.getElementById("submitButton");
+            btnlast.classList.remove("hidden");
           }
         });
       });
